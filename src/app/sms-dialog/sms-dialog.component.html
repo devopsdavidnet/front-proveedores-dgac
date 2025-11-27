@@ -1,0 +1,269 @@
+<div class="dialog-header">
+  <span class="dialog-title">Registro de Objetivos Metas e Indicadores</span>
+  <button mat-icon-button (click)="cerrar()" aria-label="Cerrar diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<button mat-raised-button class="mat-add" (click)="addObjetivo()">
+  + Objetivo
+</button>
+
+<mat-dialog-content class="dialog-scroll">
+  <form [formGroup]="formRegistroIndicadores" (ngSubmit)="onSubmit()">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <div class="node-content" [style.paddingLeft.px]="node.level * 24">
+          <button
+            *ngIf="node.expandable"
+            mat-icon-button
+            matTreeNodeToggle
+            type="button"
+          >
+            <mat-icon>{{
+              treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+            }}</mat-icon>
+          </button>
+          <span *ngIf="!node.expandable" style="width: 40px"></span>
+
+          <ng-container [ngSwitch]="node.type">
+            <ng-container *ngSwitchCase="'objetivo'">
+              <mat-form-field
+                appearance="outline"
+                class="titulo-azul"
+                style="width: 500px"
+              >
+                <mat-label
+                  ><strong style="color: brown">{{ node.label }}</strong>
+                </mat-label>
+                <input
+                  matInput
+                  [formControl]="getNombreObjetivoControl(node.indexPath[0])"
+                />
+              </mat-form-field>
+
+              <button
+                mat-icon-button
+                color="accent"
+                type="button"
+                matTooltip="Agregar Meta"
+                (click)="addMeta(node.indexPath[0])"
+                aria-label="Agregar Meta"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="removeObjetivo(node.indexPath[0])"
+                matTooltip="Eliminar Objetivo"
+                aria-label="Eliminar Objetivo"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'meta'">
+              <mat-form-field
+                appearance="outline"
+                class="titulo-azul"
+                style="width: 500px"
+              >
+                <mat-label
+                  ><strong style="color: brown">
+                    {{ node.label }}</strong
+                  ></mat-label
+                >
+                <input
+                  matInput
+                  [formControl]="
+                    getNombreMetaControl(node.indexPath[0], node.indexPath[1])
+                  "
+                />
+              </mat-form-field>
+
+              <button
+                mat-icon-button
+                color="accent"
+                type="button"
+                matTooltip="Agregar Meta"
+                (click)="addIndicador(node.indexPath[0], node.indexPath[1])"
+                matTooltip="Agregar Indicador"
+                aria-label="Agregar Meta"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="removeMeta(node.indexPath[0], node.indexPath[1])"
+                matTooltip="Eliminar Meta"
+                aria-label="Eliminar Meta"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'indicador'">
+              <div class="indicador-row">
+                <mat-form-field
+                  appearance="outline"
+                  class="titulo-azul"
+                  style="width: 70%"
+                >
+                  <mat-label
+                    ><strong style="color: brown">{{
+                      node.label
+                    }}</strong></mat-label
+                  >
+                  <input
+                    matInput
+                    [formControl]="
+                      getNombreIndicadorControl(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  />
+                </mat-form-field>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="
+                    removeIndicador(
+                      node.indexPath[0],
+                      node.indexPath[1],
+                      node.indexPath[2]
+                    )
+                  "
+                  matTooltip="Eliminar {{ node.label }}"
+                  aria-label="Eliminar "
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-form-field appearance="outline" style="width: 250px">
+                  <mat-label>Periodicidad {{ node.label }}</mat-label>
+                  <mat-select
+                    [formControl]="
+                      getPeriodicidadControl(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  >
+                    <mat-option value="diario">Diario</mat-option>
+                    <mat-option value="mensual">Mensual</mat-option>
+                    <mat-option value="trimestral">Trimestral</mat-option>
+                    <mat-option value="anual">Anual</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="width: 300px">
+                  <mat-label>Tipo de {{ node.label }}</mat-label>
+                  <mat-select
+                    [formControl]="
+                      getTipoIndicadorControl(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  >
+                    <mat-option value="reactivo">Reactivo</mat-option>
+                    <mat-option value="proactivo">Proactivo</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Fórmula del {{ node.label }}</mat-label>
+                  <input
+                    matInput
+                    [formControl]="
+                      getFormulaControl(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  />
+                </mat-form-field>
+                <!-- Alerta 1 -->
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Nivel de Alerta 1 del {{ node.label }}</mat-label>
+                  <input
+                    matInput
+                    [formControl]="
+                      getNivelAlerta1Control(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  />
+                </mat-form-field>
+                <!-- Alerta 2 -->
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Nivel de Alerta 2 del {{ node.label }}</mat-label>
+                  <input
+                    matInput
+                    [formControl]="
+                      getNivelAlerta2Control(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  />
+                </mat-form-field>
+
+                <!-- Alerta 3 -->
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Nivel de Alerta 3 del {{ node.label }}</mat-label>
+                  <input
+                    matInput
+                    [formControl]="
+                      getNivelAlerta3Control(
+                        node.indexPath[0],
+                        node.indexPath[1],
+                        node.indexPath[2]
+                      )
+                    "
+                  />
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </mat-tree-node>
+    </mat-tree>
+
+    <div class="dialog-actions">
+      <button
+        class="mat-accent"
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="formRegistroIndicadores.invalid"
+      >
+        Aceptar
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+<!--<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>-->
+<!--
+
+            <mat-icon>{{
+              treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+            }}</mat-icon>
+          </button>
+          <span *ngIf="!node.expandable" style="width: 40px"></span>
+
+
+
+
+
+-->

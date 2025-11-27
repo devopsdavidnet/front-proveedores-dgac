@@ -1,0 +1,46 @@
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #053e77; /* azul Material */
+  color: white;
+  padding: 8px 16px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.dialog-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+mat-dialog-content {
+  padding: 16px;
+}
+
+mat-dialog-actions {
+  padding: 8px 16px;
+}
+/* Estilos para el botón de "Guardar" y "Enviar" */
+/* Asumiendo que tu botón "Guardar" es `mat-raised-button` con `color="accent"` */
+.mat-accent { /* Este selector apunta a los botones con color="accent" */
+  background-color: #003366 !important; /* Fondo azul marino */
+  color: white !important; /* Texto blanco */
+  font-weight: bold; /* Opcional: para que el texto resalte más */
+  padding: 8px 24px; /* Opcional: ajusta el relleno si es necesario */
+}
+
+.mat-add { /* Este selector apunta a los botones con color="accent" */
+  background-color: #fff8b6 !important; /* Fondo azul marino */
+  color: rgb(0,0,0) !important; /* Texto blanco */
+  font-weight: bold; /* Opcional: para que el texto resalte más */
+  padding: 8px 24px; /* Opcional: ajusta el relleno si es necesario */
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 10px; /* Espacio entre los botones */
+  margin-top: 20px; /* Margen superior para separarlos del formulario */
+  padding: 10px 0; /* Relleno vertical */
+}

@@ -1,0 +1,122 @@
+<div class="dialog-header">
+  <span class="dialog-title">Registro de Datos de Aeronaves</span>
+  <button mat-icon-button (click)="cerrar()" aria-label="Cerrar diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<button mat-raised-button type="button" class="mat-add" (click)="addAeronave()">
+  <mat-icon>add</mat-icon> Adicionar Aeronave
+</button>
+
+<mat-dialog-content class="dialog-scroll">
+  <form
+    [formGroup]="formAeronaves"
+    (ngSubmit)="onSubmit()"
+    class="form-container"
+  >
+    <div formArrayName="aeronaves">
+      <div
+        *ngFor="let aeronave of aeronaves.controls; let i = index"
+        [formGroupName]="i"
+        class="aeronave-card"
+      >
+        <mat-card>
+          <mat-card-title
+            ><strong style="color: rgb(8, 74, 133)"
+              >Aeronave #{{ i + 1 }}</strong
+            >
+            <button
+              mat-icon-button
+              color="warn"
+              matTooltip="Eliminar Aeronave #{{ i + 1 }}"
+              (click)="removeAeronave(i)"
+              aria-label="Eliminar aeronave"
+            >
+              <mat-icon>delete</mat-icon>
+            </button></mat-card-title
+          >
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Matrícula</mat-label>
+            <input matInput formControlName="matricula" />
+            <mat-error
+              *ngIf="
+                aeronave.get('matricula')?.hasError('required') &&
+                aeronave.get('matricula')?.touched
+              "
+            >
+              La matrícula es obligatoria.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Marca</mat-label>
+            <input matInput formControlName="marca" />
+            <mat-error
+              *ngIf="
+                aeronave.get('marca')?.hasError('required') &&
+                aeronave.get('marca')?.touched
+              "
+            >
+              La marca es obligatoria.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Modelo</mat-label>
+            <input matInput formControlName="modelo" />
+            <mat-error
+              *ngIf="
+                aeronave.get('modelo')?.hasError('required') &&
+                aeronave.get('modelo')?.touched
+              "
+            >
+              El modelo es obligatorio.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Serie</mat-label>
+            <input matInput formControlName="serie" />
+            <mat-error
+              *ngIf="
+                aeronave.get('serie')?.hasError('required') &&
+                aeronave.get('serie')?.touched
+              "
+            >
+              La serie es obligatoria.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fecha de Expiración</mat-label>
+            <input matInput type="date" formControlName="fechaExpiracion" />
+            <mat-error
+              *ngIf="
+                aeronave.get('fechaExpiracion')?.hasError('required') &&
+                aeronave.get('fechaExpiracion')?.touched
+              "
+            >
+              La fecha de expiración es obligatoria.
+            </mat-error>
+          </mat-form-field>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button
+        class="mat-accent"
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="formAeronaves.invalid"
+      >
+        Aceptar
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+<!--<mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>-->

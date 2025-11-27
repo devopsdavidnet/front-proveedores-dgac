@@ -1,0 +1,164 @@
+<div class="dialog-header">
+  <span class="dialog-title">Registro de Usuario</span>
+  <button mat-icon-button (click)="cerrar()" aria-label="Cerrar diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-content>
+      <form [formGroup]="registroForm" (ngSubmit)="onRegister()">
+        <!--tipo explotador -->
+        <mat-form-field class="full-width">
+          <mat-label>Tipo de Proveedor de Servicios</mat-label>
+          <mat-select formControlName="tipoExplotador">
+            <mat-option value="AOC">EXPLOTADOR AEREO - AOC </mat-option>
+            <mat-option value="OMA">ORGANIZACION DE MANTENIMIENTO </mat-option>
+            <mat-option value="CIAC"
+              >CENTRO DE INSTRUCCIÓN DE AERONAUTICA CIVIL - CIAC
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre del Proveedor</mat-label>
+          <input
+            matInput
+            formControlName="nombreProveedor"
+            (input)="convertirMayusculas()"
+          />
+          <mat-error
+            *ngIf="
+              registroForm.get('nombreProveedor')?.invalid &&
+              registroForm.get('nombreProveedor')?.touched
+            "
+          >
+            El nombre del proveedor es requerido.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="row-field">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              formControlName="nombre"
+              (input)="convertirMayusculas()"
+            />
+            <mat-error
+              *ngIf="
+                registroForm.get('nombre')?.invalid &&
+                registroForm.get('nombre')?.touched
+              "
+            >
+              El nombre es requerido.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="row-field">
+            <mat-label>Primer Apellido</mat-label>
+            <input
+              matInput
+              formControlName="primerApellido"
+              (input)="convertirMayusculas()"
+            />
+            <mat-error
+              *ngIf="
+                registroForm.get('primerApellido')?.invalid &&
+                registroForm.get('primerApellido')?.touched
+              "
+            >
+              El primer apellido es requerido.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="row-field">
+            <mat-label>Segundo Apellido</mat-label>
+            <input
+              matInput
+              formControlName="segundoApellido"
+              (input)="convertirMayusculas()"
+            />
+            <mat-error
+              *ngIf="
+                registroForm.get('segundoApellido')?.invalid &&
+                registroForm.get('segundoApellido')?.touched
+              "
+            >
+              El segundo apellido es requerido.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="row-field">
+            <mat-label>Celular</mat-label>
+            <input matInput type="tel" formControlName="celular" />
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error
+              *ngIf="
+                registroForm.get('celular')?.invalid &&
+                registroForm.get('celular')?.touched
+              "
+            >
+              <span *ngIf="registroForm.get('celular')?.errors?.['required']">
+                El número de celular es requerido.
+              </span>
+              <span *ngIf="registroForm.get('celular')?.errors?.['pattern']">
+                Por favor, ingrese un número de 8 dígitos.
+              </span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="row-field">
+            <mat-label>Cedula Identidad</mat-label>
+            <input
+              matInput
+              formControlName="cedulaIdentidad"
+              (input)="convertirMayusculas()"
+            />
+
+            <mat-error
+              *ngIf="
+                registroForm.get('cedulaIdentidad')?.invalid &&
+                registroForm.get('cedulaIdentidad')?.touched
+              "
+            >
+              El cedula identidad es requerido.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="row-field">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput type="email" formControlName="correo" />
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error
+              *ngIf="
+                registroForm.get('correo')?.invalid &&
+                registroForm.get('correo')?.touched
+              "
+            >
+              <span *ngIf="registroForm.get('correo')?.errors?.['required']">
+                El correo es requerido.
+              </span>
+              <span *ngIf="registroForm.get('correo')?.errors?.['email']">
+                Por favor, ingrese un correo válido.
+              </span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width-btn"
+          [disabled]="registroForm.invalid"
+        >
+          Registrarse
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

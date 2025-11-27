@@ -1,0 +1,71 @@
+<div class="dialog-header">
+  <span class="dialog-title">Registro de Datos de Personal Certificado</span>
+  <button mat-icon-button (click)="cerrar()" aria-label="Cerrar diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<button mat-raised-button class="mat-add" type="button" (click)="addPersona()">
+  + Agregar Persona
+</button>
+<mat-dialog-content id="scrollContainer" class="scroll-dialog">
+  <form
+    [formGroup]="formPersonalInstructor"
+    (ngSubmit)="onSubmit()"
+    class="formulario-dinamico"
+  >
+    <div
+      formArrayName="personal"
+      *ngFor="let persona of personalArray.controls; let i = index"
+    >
+      <mat-card class="mt-4 p-4" class="dialog-scroll">
+        <mat-card-title
+          ><strong>Persona #{{ i + 1 }} </strong>
+          <div class="mt-2">
+            <button
+              mat-icon-button
+              matTooltip="Eliminar Persona #{{ i + 1 }}"
+              color="warn"
+              (click)="removePersona(i)"
+              type="button"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div></mat-card-title
+        >
+
+        <div [formGroupName]="i" class="grid gap-4 md:grid-cols-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Nombres</mat-label>
+            <input matInput formControlName="nombres" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Primer Apellido</mat-label>
+            <input matInput formControlName="primerApellido" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Segundo Apellido</mat-label>
+            <input matInput formControlName="segundoApellido" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Cédula de Identidad</mat-label>
+            <input matInput formControlName="cedula" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Número de Licencia</mat-label>
+            <input matInput formControlName="licencia" />
+          </mat-form-field>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="dialog-actions">
+      <button class="mat-accent" mat-raised-button color="accent" type="submit">
+        Aceptar
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

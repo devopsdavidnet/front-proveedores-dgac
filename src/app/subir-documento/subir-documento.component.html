@@ -1,0 +1,41 @@
+<div class="dialog-header">
+  <span class="dialog-title">Subir archivo </span>
+  <button mat-icon-button (click)="cerrar()" aria-label="Cerrar diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <input type="file" (change)="onFileSelected($event)" #fileInput />
+
+  <div *ngIf="selectedFile">
+    <p>Archivo seleccionado: {{ selectedFile.name }}</p>
+
+    <!-- Barra de progreso visible durante la subida -->
+    <mat-progress-bar
+      *ngIf="uploadProgress > 0 && uploadProgress < 100"
+      [value]="uploadProgress"
+      mode="determinate"
+    >
+    </mat-progress-bar>
+
+    <!-- Mensaje cuando termina -->
+
+    <div *ngIf="uploadProgress === 100" class="upload-success">
+      <strong>¡Archivo subido con éxito!</strong>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <!-- <button class="btn-elegante" mat-button mat-dialog-close>Cancelar</button> -->
+  <button
+    class="btn-elegante"
+    mat-raised-button
+    color="accent"
+    [disabled]="!selectedFile"
+    (click)="onUpload()"
+  >
+    Subir
+  </button>
+</mat-dialog-actions>

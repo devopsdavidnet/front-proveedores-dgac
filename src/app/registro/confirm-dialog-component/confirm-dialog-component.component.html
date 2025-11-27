@@ -1,0 +1,17 @@
+<div class="dialog-header">
+  <span class="dialog-title">Mensaje de Confirmación</span>
+</div>
+
+<mat-dialog-content
+  ><h2>
+    ¿Confirma que desea guardar los datos ingresados de su organización?
+  </h2></mat-dialog-content
+>
+<mat-dialog-actions align="end">
+  <div class="dialog-actions">
+    <button class="mat-accent" mat-button (click)="cancelar()">No</button>
+    <button class="mat-accent" mat-button color="primary" (click)="confirmar()">
+      Sí
+    </button>
+  </div>
+</mat-dialog-actions>

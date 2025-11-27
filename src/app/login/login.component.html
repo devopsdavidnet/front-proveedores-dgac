@@ -1,0 +1,69 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-title class="login-title">Iniciar Sesión</mat-card-title>
+    <mat-card-content>
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo Electrónico</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="ejemplo@correo.com"
+            formControlName="email"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error
+            *ngIf="
+              loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+            "
+          >
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">
+              El correo electrónico es requerido.
+            </span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">
+              Por favor, ingrese un correo electrónico válido.
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="********"
+            formControlName="password"
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              loginForm.get('password')?.touched
+            "
+          >
+            La contraseña es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width-btn"
+          [disabled]="loginForm.invalid"
+        >
+          Iniciar Sessión
+        </button>
+      </form>
+      <!--
+      <div class="register-link-container">
+        <a routerLink="/register">¿No tienes una cuenta? Regístrate aquí.</a>
+      </div>-->
+      <div class="register-link-container">
+        <a (click)="openRegistrationDialog()"
+          >¿No tienes una cuenta? Regístrate aquí.</a
+        >
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

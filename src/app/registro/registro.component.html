@@ -1,0 +1,955 @@
+<form [formGroup]="formRegistro">
+  <mat-tab-group>
+    <!--TAB 1-->
+    <mat-tab label="1. Información General de la Organización">
+      <hr />
+
+      <!--tipo explotador
+      <mat-form-field class="full-width">
+        <mat-label>Tipo de Proveedor de Servicios</mat-label>
+        <mat-select formControlName="tipoExplotador">
+          <mat-option value="AOC">EXPLOTADOR AEREO - AOC </mat-option>
+          <mat-option value="OMA">ORGANIZACION DE MANTENIMIENTO </mat-option>
+          <mat-option value="CIAC"
+            >CENTRO DE INSTRUCCIÓN DE AERONAUTICA CIVIL - CIAC
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      /* *ngIf="formRegistro.get('tipoExplotador')?.value === 'AOC'"*/
+ -->
+
+      <!--  nombre o razon de la organizacion-->
+      <mat-form-field class="full-width">
+        <mat-label>Tipo de Proveedor de Servicio</mat-label>
+        <input readonly matInput formControlName="tipoExplotador" />
+      </mat-form-field>
+
+      <!--  nombre o razon de la organizacion-->
+      <mat-form-field class="full-width">
+        <mat-label>Nombre o Razón de la Organización/Entidad</mat-label>
+
+        <input
+          readonly
+          matInput
+          formControlName="nombreOrganizacion"
+          (input)="convertirMayusculas()"
+        />
+      </mat-form-field>
+
+      <!-- Departamento-->
+      <mat-form-field class="full-width">
+        <mat-label
+          >Departamento de ubicación de la Base Principal de la
+          Organización/Entidad
+        </mat-label>
+        <mat-select formControlName="departamento">
+          <mat-option [value]="1">LA PAZ</mat-option>
+          <mat-option [value]="2">COCHABAMBA</mat-option>
+          <mat-option [value]="3">SANTA CRUZ</mat-option>
+          <mat-option [value]="4">BENI</mat-option>
+          <mat-option [value]="5">PANDO</mat-option>
+          <mat-option [value]="6">ORURO</mat-option>
+          <mat-option [value]="7">POTOSI</mat-option>
+          <mat-option [value]="8">CHUQUISACA</mat-option>
+          <mat-option [value]="9">TARIJA</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label
+          >Dirección de ubicación Base Principal de la Organización/Entidad
+        </mat-label>
+        <input
+          (input)="convertirMayusculas()"
+          matInput
+          formControlName="direccion"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label
+          >Teléfono de principal de contacto de la Organización/Entidad
+        </mat-label>
+        <input matInput type="number" formControlName="telefonoOrganizacion" />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>
+          Correo electronico principal de contacto de la Organización
+        </mat-label>
+        <input matInput formControlName="correoOrganizacion" />
+      </mat-form-field>
+    </mat-tab>
+    <!--TAB 2 -->
+    <mat-tab label="2. Certificación">
+      <hr />
+      <mat-form-field class="full-width">
+        <mat-label
+          >Fecha de la Certificación Inicial de la
+          Organización/Entidad</mat-label
+        >
+        <input
+          matInput
+          type="date"
+          formControlName="fechaInicialCertificacion"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label
+          *ngIf="['AOC'].includes(formRegistro.get('tipoExplotador')?.value)"
+        >
+          Fecha de expiración de Permiso de Operación
+        </mat-label>
+        <mat-label
+          *ngIf="!['AOC'].includes(formRegistro.get('tipoExplotador')?.value)"
+        >
+          Fecha de expiración de la Certificación Vigente de la
+          Organización/Entidad
+        </mat-label>
+
+        <input
+          matInput
+          type="date"
+          formControlName="fechaExpiracionCertificacion"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label
+          >Número de certificado emitido por la DGAC a la organización/entidad
+        </mat-label>
+        <input matInput formControlName="numeroCertificado" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label
+          >Número de Resolución Administrativa emtido por la DGAC
+        </mat-label>
+        <input matInput formControlName="numeroResolucionAdministrativa" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label
+          >Regulación aplicable a la Clase de Certificación otorgada o aplicable
+          a la Organización/Entidad
+        </mat-label>
+        <mat-select formControlName="resolucionTipoOrganizacion">
+          <mat-option [value]="1">RAB 91</mat-option>
+          <mat-option [value]="2">RAB 121</mat-option>
+          <mat-option [value]="3">RAB 135</mat-option>
+          <mat-option [value]="4">RAB 133</mat-option>
+          <mat-option [value]="5">RAB 139</mat-option>
+          <mat-option [value]="6">RAB 145</mat-option>
+          <mat-option [value]="7">RAB 211</mat-option>
+          <mat-option [value]="8">RAB 141</mat-option>
+          <mat-option [value]="9">RAB 142</mat-option>
+          <mat-option [value]="10">RAB 147</mat-option>
+          <mat-option [value]="11">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        *ngIf="formRegistro.get('resolucionTipoOrganizacion')?.value === '11'"
+        class="full-width"
+      >
+        <mat-label>Otra regulación aplicada</mat-label>
+        <input
+          matInput
+          formControlName="otraResolucionTipoOrganizacion"
+          (input)="convertirMayusculas()"
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        class="full-width"
+        *ngIf="['CIAC'].includes(formRegistro.get('tipoExplotador')?.value)"
+      >
+        <mat-label>Tipo de Operación de la Organización/Entidad</mat-label>
+        <mat-select formControlName="tipoOperacion">
+          <mat-option value="Regular">Regular</mat-option>
+
+          <mat-option value="No Regular">No Regular</mat-option>
+          <mat-option value="Aviación General">Aviación General</mat-option>
+          <mat-option value="Trabajo Aéreo">Trabajo Aéreo</mat-option>
+          <mat-option value="Entrenamiento">Entrenamiento</mat-option>
+
+          <mat-option value="Mantenimiento">Mantenimiento</mat-option>
+          <mat-option value="Otro">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        *ngIf="formRegistro.get('tipoOperacion')?.value === 'Otro'"
+        class="full-width"
+      >
+        <mat-label>Otro tipo de Operación</mat-label>
+        <input matInput formControlName="otroTipoOperacion" />
+      </mat-form-field>
+
+      <div class="sms-opcion">
+        <mat-checkbox formControlName="tieneSms" (change)="onSMSChange($event)">
+          El Sistema de Gestión de Seguridad Operacional (SMS) ha sido aprobado.
+          (Marque si corresponde; en caso contrario, NO marque).
+        </mat-checkbox>
+
+        <!-- "Botón" con estilo de link -->
+        <button
+          *ngIf="formRegistro.get('tieneSms')?.value"
+          mat-button
+          class="link-boton"
+          (click)="registroIndicadores()"
+        >
+          Ver Indicadores Registrados
+        </button>
+      </div>
+
+      <mat-form-field
+        *ngIf="formRegistro.get('tieneSms')?.value"
+        class="full-width"
+        ><hr />
+        <mat-label>Fecha de Aceptación Inicial del SMS</mat-label>
+        <input matInput type="date" formControlName="fechaAceptacionSms" />
+      </mat-form-field>
+
+      <div *ngIf="['AOC'].includes(formRegistro.get('tipoExplotador')?.value)">
+        <hr />
+        <label class="section-label">
+          Aprobaciones específicas otorgadas a la Organización/Entidad </label
+        ><br />
+        <mat-checkbox formControlName="especificacionEdto">EDTO</mat-checkbox>
+        <mat-checkbox formControlName="especificacionPbn">PBN</mat-checkbox>
+        <mat-checkbox formControlName="especificacionCat"
+          >CAT II/III</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacionEfb">EFB</mat-checkbox>
+        <mat-checkbox formControlName="especificacionRvsm">RVSM</mat-checkbox>
+        <mat-checkbox formControlName="especificacionMp"
+          >Mercancias Peligrosas</mat-checkbox
+        >
+        <mat-checkbox formControlName="especificacionLl"
+          >Línea Larga</mat-checkbox
+        >
+
+        <mat-checkbox formControlName="especificacionHets">HETS</mat-checkbox>
+        <mat-checkbox formControlName="especificacionMedevac"
+          >MEDEVAC</mat-checkbox
+        >
+
+        <mat-checkbox formControlName="epecificacionOtro">Otro</mat-checkbox>
+
+        <mat-form-field
+          *ngIf="formRegistro.get('epecificacionOtro')?.value"
+          class="full-width"
+        >
+          <mat-label>Especifique</mat-label>
+          <input matInput formControlName="otraEspecificacion" />
+        </mat-form-field>
+      </div>
+      <div
+        *ngIf="
+          ['AOC', 'CIAC'].includes(formRegistro.get('tipoExplotador')?.value)
+        "
+      >
+        <hr />
+        <button mat-raised-button class="btn-img" (click)="registroAeronaves()">
+          <img src="assets/images/jet_plane_1.png" class="btn-icon" />
+          Registrar Datos de Aeronave
+        </button>
+      </div>
+    </mat-tab>
+
+    <!-- TAB 3 https://www.youtube.com/watch?v=MiG-sAbupos&t=1958s-->
+    <mat-tab label="3. Dirección">
+      <ng-template mat-tab-label="3. Dirección">
+        3. Caracteristicas de la Organización
+      </ng-template>
+
+      <div>
+        <label
+          *ngIf="
+            ['OMA', 'CIAC'].includes(formRegistro.get('tipoExplotador')?.value)
+          "
+        >
+          Organización :
+        </label>
+        <mat-radio-group
+          *ngIf="
+            ['OMA', 'CIAC'].includes(formRegistro.get('tipoExplotador')?.value)
+          "
+          formControlName="nacionalidadOrganizacion"
+          class="radio-group"
+        >
+          <mat-radio-button value="NACIONAL">Nacional</mat-radio-button>
+          <mat-radio-button value="EXTRANJERA">Extranjera</mat-radio-button>
+        </mat-radio-group>
+        <hr />
+        <label class="section-label">Tamaño de la organización :</label>
+        <mat-radio-group
+          formControlName="tamanoOrganizacion"
+          class="radio-group"
+        >
+          <mat-radio-button value="PEQUEÑO">Pequeño</mat-radio-button>
+          <mat-radio-button value="MEDIANO">Mediano</mat-radio-button>
+          <mat-radio-button value="GRANDE">Grande</mat-radio-button>
+        </mat-radio-group>
+        <hr />
+        <label class="section-label">Complejidad de la Organización</label>
+        <mat-radio-group
+          formControlName="complejidadOrganizacion"
+          class="radio-group"
+        >
+          <mat-radio-button value="COMPLEJA">Compleja</mat-radio-button>
+          <mat-radio-button value="NO COMPLEJA">No compleja</mat-radio-button>
+        </mat-radio-group>
+
+        <div
+          *ngIf="['OMA'].includes(formRegistro.get('tipoExplotador')?.value)"
+        >
+          <hr />
+          <label class="section-label">
+            Capacidades de la Organización/Entidad <br />
+          </label>
+          <mat-checkbox
+            formControlName="capacidadOrganizacionEstructuraAeronave"
+            >Estructura de Aeronaves</mat-checkbox
+          >
+          <mat-checkbox formControlName="capacidadOrganizacionMotorAeronave"
+            >Motores de Aeronaves</mat-checkbox
+          >
+          <mat-checkbox formControlName="capacidadOrganizacionHelices"
+            >Hélices</mat-checkbox
+          >
+          <mat-checkbox formControlName="capacidadOrganiazacionRadio"
+            >Rádio (Aviónica)</mat-checkbox
+          >
+          <mat-checkbox formControlName="capacidadOrganizacionSistema"
+            >Sistemas de Computadora</mat-checkbox
+          >
+          <mat-checkbox formControlName="capacidadOrganizacionAccesorios"
+            >Accesorios</mat-checkbox
+          >
+          <mat-checkbox formControlName="capacidadOrganizacionServicio"
+            >Servicios Especializados</mat-checkbox
+          >
+          <mat-checkbox formControlName="otroCapacidadOrganizacion"
+            >Otro</mat-checkbox
+          >
+          <div *ngIf="formRegistro.get('otroCapacidadOrganizacion')?.value">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Especifique</mat-label>
+              <input matInput formControlName="otroCapacidadOrganizaciones" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div
+          *ngIf="['CIAC'].includes(formRegistro.get('tipoExplotador')?.value)"
+        >
+          <HR />
+          <label class="section-label">
+            Tipo de la Organización/Entidad <br />
+          </label>
+          <mat-checkbox formControlName="tipo1">Tipo 1</mat-checkbox>
+          <mat-checkbox formControlName="tipo2">Tipo 2</mat-checkbox>
+          <mat-checkbox formControlName="tipo3">Tipo 3</mat-checkbox>
+          <mat-checkbox formControlName="tipo4">CEAC RAB-142</mat-checkbox>
+          <mat-checkbox formControlName="tipo5">CIAC RAB-147</mat-checkbox>
+        </div>
+        <hr />
+        <label class="section-label">
+          Indique si la Organización/Entidad cuenta con otras Certificaciones o
+          participa en programas de intercambio de la industria (si aplica)
+          <br />
+        </label>
+        <mat-checkbox formControlName="certificadoTrainair"
+          >TRAINAIR PLUS (OACI)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoTrainair')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input
+            *ngIf="formRegistro.get('certificadoTrainair')?.value"
+            matInput
+            type="date"
+            formControlName="fechaExpiracionCertificadoTrainair"
+          />
+        </mat-form-field>
+
+        <!--Opcion 2-->
+        <mat-checkbox formControlName="certificadoIosa"
+          >Certificacion IOSA (IATA Operational Safety Audit)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoIosa')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input
+            matInput
+            type="date"
+            formControlName="fechaExpiracionCertificadoIosa"
+          />
+        </mat-form-field>
+        <mat-checkbox formControlName="certificadoIsago"
+          >Certificacion ISAGO (IATA Safety Audit for Ground
+          Operations)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoIsago')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionIsago" />
+        </mat-form-field>
+
+        <!--Opcion 4-->
+
+        <mat-checkbox formControlName="certificadoIss"
+          >ISS (IATA Safety Strategy)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoIss')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionIss" />
+        </mat-form-field>
+        <!-- Opcion 5 -->
+
+        <mat-checkbox formControlName="certificadoClac"
+          >CLAC (Comisión Latinoamericana de Aviación Civil)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoClac')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionClac" />
+        </mat-form-field>
+
+        <!-- Opcion 6 -->
+
+        <mat-checkbox formControlName="certificadoRolls"
+          >Programa de Intercambio de Rolls-Royce</mat-checkbox
+        >
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoRolls')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionRoll" />
+        </mat-form-field>
+
+        <!-- Opcion 7 -->
+
+        <mat-checkbox formControlName="certificadoAirbus"
+          >Airbus Safety Program</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoAirbus')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionAirbus" />
+        </mat-form-field>
+
+        <!-- Opcion 8 -->
+
+        <mat-checkbox formControlName="certificadoRedalc"
+          >Red de Escuelas Aeronáuticas de América Latina y el Caribe
+          (REDALC)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoRedalc')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input
+            matInput
+            type="date"
+            formControlName="fechaExpiracioncertificadoRedalc"
+          />
+        </mat-form-field>
+
+        <!-- Opcion 9 -->
+
+        <mat-checkbox formControlName="certificadoGadm"
+          >GADM (Global Aviation Data Management)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoGadm')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionGadm" />
+        </mat-form-field>
+
+        <!-- Opcion 10 -->
+
+        <mat-checkbox formControlName="certificadoBoeign"
+          >Programa Boeing Safety Exchange</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoBoeign')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionBoeign" />
+        </mat-form-field>
+        <!-- Opcion 11 -->
+
+        <mat-checkbox formControlName="certificadoRasg">
+          RASG-PA (Regional Aviation Safety Group - Pan America)</mat-checkbox
+        >
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoRasg')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionRasg" />
+        </mat-form-field>
+
+        <!-- Opcion 12 -->
+
+        <mat-checkbox formControlName="certificadoCoscap">
+          COSCAP (Cooperative Development of Operational Safety and Continuing
+          Airworthiness Programmes)
+        </mat-checkbox>
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoCoscap')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input matInput type="date" formControlName="fechaExpiracionCoscap" />
+        </mat-form-field>
+
+        <!-- Opcion 13 -->
+
+        <mat-checkbox formControlName="certificadoCalidad">
+          Certificacion ISO - CALIDAD
+        </mat-checkbox>
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoCalidad')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input
+            matInput
+            type="date"
+            formControlName="fechaExpiracionCalidad"
+          />
+        </mat-form-field>
+
+        <!--Opcion 14-->
+
+        <mat-checkbox formControlName="certificadoTrabajo">
+          Certificación ISO - SEGURIDAD EN EL TRABAJO
+        </mat-checkbox>
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoTrabajo')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input
+            matInput
+            type="date"
+            formControlName="fechaExpiracionTrabajo"
+          />
+        </mat-form-field>
+
+        <!--Opcion 16-->
+
+        <mat-checkbox formControlName="certificadoMultinacional">
+          Certificación Multinacional (SRVSOP) - OMA/CIAC
+        </mat-checkbox>
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoMultinacional')?.value"
+          class="full-width"
+        >
+          <mat-label> Fecha de Expiración </mat-label>
+
+          <input
+            matInput
+            type="date"
+            formControlName="fechaExpiracionMultinacional"
+          />
+        </mat-form-field>
+        <!--Opcion 17 -->
+        <mat-checkbox formControlName="certificadoGcso">
+          GRUPO DE COORNINACIÓN PAR LA SEGURIDAD OPERACIONAL (GCSO) - INDUSTRIA
+          BOLIVIA
+        </mat-checkbox>
+
+        <mat-form-field
+          *ngIf="formRegistro.get('certificadoGcso')?.value"
+          class="full-width"
+        >
+          <mat-label>Fecha de Expiración</mat-label>
+          <input matInput type="date" formControlName="fechaExpiracionGcso" />
+        </mat-form-field>
+      </div>
+    </mat-tab>
+    <!-- TAB 4 " -->
+    <mat-tab label="Finalizar">
+      <ng-template mat-tab-label>
+        4.- Personal Directorio y Técnico
+      </ng-template>
+      <hr />
+      <div
+        class="tab-content"
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
+        *ngIf="formRegistro.get('tipoExplotador')?.value !== 'CIAC'"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gerente O Ejecutivo Responsable</mat-label>
+          <input matInput formControlName="nombreGerenteResponsable" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoGerenteResponsable" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoGerenteResponsable" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            matInput
+            type="date"
+            formControlName="fechaDesignacionGerenteResponsable"
+          />
+        </mat-form-field>
+
+        <ng-container
+          *ngIf="formRegistro.get('tipoExplotador')?.value === 'AOC'"
+        >
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Responsable de Operaciones </mat-label>
+            <input matInput formControlName="nombreResponsableOperaciones" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefonoResponsableOperaciones" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="correoResponsableOperaciones" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Fecha Designación</mat-label>
+            <input
+              type="date"
+              matInput
+              formControlName="fechaDesignacionResponsableOperaciones"
+            />
+          </mat-form-field>
+        </ng-container>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Mantenimiento </mat-label>
+          <input matInput formControlName="nombreResponsableMantenimiento" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoResponsableMantenimiento" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoResponsableMantenimiento" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fechaDesignacionResponsableMantenimiento"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de SMS </mat-label>
+          <input matInput formControlName="nombreResponsableSms" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoResponsableSms" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoResponsableSms" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fechaDesignacionResponsableSms"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Responsable de Calidad </mat-label>
+          <input matInput formControlName="nombreResponsableCalidad" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoResponsableCalidad" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoResponsableCalidad" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fechaDesignacionResponsableCalidad"
+          />
+        </mat-form-field>
+
+        <ng-container
+          *ngIf="formRegistro.get('tipoExplotador')?.value === 'AOC'"
+        >
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Jefe de Pilotos</mat-label>
+            <input matInput formControlName="nombreJefePiloto" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefonoJefePiloto" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="correoJefePiloto" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>fecha Designación</mat-label>
+            <input
+              type="date"
+              matInput
+              formControlName="fechaDesignacionJefePiloto"
+            />
+          </mat-form-field>
+        </ng-container>
+
+        <ng-container
+          *ngIf="
+            formRegistro.get('resolucionTipoOrganizacion')?.value === '3' &&
+            formRegistro.get('tipoExplotador')?.value === 'AOC'
+          "
+        >
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Jefe de Instrucción </mat-label>
+            <input matInput formControlName="nombreJefeInstruccion" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefonoJefeInstruccion" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="correoJefeInstruccion" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Fecha Designación</mat-label>
+            <input
+              type="date"
+              matInput
+              formControlName="fechaDesignacionJefeInstruccion"
+            />
+          </mat-form-field>
+        </ng-container>
+      </div>
+      <!-- CIAC -->
+
+      <div
+        class="tab-content"
+        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px"
+        *ngIf="formRegistro.get('tipoExplotador')?.value === 'CIAC'"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gerente O Ejecutivo Responsable</mat-label>
+          <input matInput formControlName="nombreGerenteResponsable" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoGerenteResponsable" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoGerenteResponsable" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            matInput
+            type="date"
+            formControlName="fechaDesignacionGerenteResponsable"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Vuelo </mat-label>
+          <input matInput formControlName="nombreJefeVueloCIAC" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoJefeVueloCIAC" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoJefeVueloCIAC" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fechaDesignacionJefeVueloCIAC"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jefe de Instrucción</mat-label>
+          <input matInput formControlName="nombreJefeInstruccionTeoricaCIAC" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input
+            matInput
+            formControlName="telefonoJefeInstruccionTeoricaCIAC"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoJefeInstruccionTeoricaCIAC" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fechaDesignacionJefeInstruccionTeoricaCIAC"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Asistente Instructor </mat-label>
+          <input matInput formControlName="nombreAsistenteInstructorCiac" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefonoAsistenteInstructorCiac" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correoAsistenteInstructorCiac" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Designación</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fechaDesignacionAsistenteInstructorCiac"
+          />
+        </mat-form-field>
+
+        <button mat-button class="btn-img" (click)="registroIntructores()">
+          <img
+            src="assets/images/teacher.png"
+            alt="Adicionar"
+            class="btn-icon"
+          />
+          Registrar Personal Certificado
+        </button>
+      </div>
+      <!--  <div class="dialog-actions1">
+        <button
+          mat-raised-button
+          class="mat-accent1"
+          (click)="onEnviarFormulario()"
+        >
+          Enviar
+        </button>
+      </div>  -->
+      <div class="dialog-actions1">
+        <button
+          mat-raised-button
+          class="btn-elegante"
+          (click)="onRevisarFormulario()"
+        >
+          Revisar
+        </button>
+
+        <button
+          mat-raised-button
+          class="btn-elegante"
+          [disabled]="isDisabled"
+          (click)="onGuardarEnviar()"
+        >
+          Guardar y Enviar
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</form>
