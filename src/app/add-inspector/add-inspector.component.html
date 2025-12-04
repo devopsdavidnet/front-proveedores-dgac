@@ -1,0 +1,90 @@
+<div class="dialog-header">
+  <span class="dialog-title">Registro de Datos Personales</span>
+  <button mat-icon-button (click)="cerrar()" aria-label="Cerrar diálogo">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form [formGroup]="personaForm" (ngSubmit)="guardar()" class="form-container">
+  <mat-card>
+    <mat-card-title>Registro de Persona</mat-card-title>
+    <mat-card-content>
+      <div class="grid-form">
+        <!-- Nombre -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" />
+          <mat-error *ngIf="personaForm.get('nombre')?.hasError('required')">
+            El nombre es obligatorio
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Primer Apellido -->
+        <mat-form-field appearance="outline">
+          <mat-label>Primer Apellido</mat-label>
+          <input matInput formControlName="primerApellido" />
+          <mat-error
+            *ngIf="personaForm.get('primerApellido')?.hasError('required')"
+          >
+            El primer apellido es obligatorio
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Segundo Apellido -->
+        <mat-form-field appearance="outline">
+          <mat-label>Segundo Apellido</mat-label>
+          <input matInput formControlName="segundoApellido" />
+        </mat-form-field>
+
+        <!-- CI -->
+        <mat-form-field appearance="outline">
+          <mat-label>Cédula de Identidad</mat-label>
+          <input matInput formControlName="cedulaIdentidad" />
+          <mat-error
+            *ngIf="personaForm.get('cedulaIdentidad')?.hasError('required')"
+          >
+            La cédula es obligatoria
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Celular -->
+        <mat-form-field appearance="outline">
+          <mat-label>Celular</mat-label>
+          <input matInput formControlName="celular" />
+          <mat-error *ngIf="personaForm.get('celular')?.hasError('pattern')">
+            Debe contener solo números (7-15 dígitos)
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Correo -->
+        <mat-form-field appearance="outline">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correo" />
+          <mat-error *ngIf="personaForm.get('correo')?.hasError('required')">
+            El correo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="personaForm.get('correo')?.hasError('email')">
+            Formato de correo inválido
+          </mat-error>
+        </mat-form-field>
+        <!-- Tipo (Select) -->
+        <mat-form-field appearance="outline">
+          <mat-label>INSPECTO DE:</mat-label>
+          <mat-select formControlName="tipo">
+            <mat-option value="CIAC/CEAC">CIAC</mat-option>
+            <mat-option value="OMA">OMA</mat-option>
+            <mat-option value="AOC">AOC</mat-option>
+          </mat-select>
+          <mat-error *ngIf="personaForm.get('tipo')?.hasError('required')">
+            El tipo es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-button type="reset" (click)="personaForm.reset()">
+        Limpiar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -18,17 +18,62 @@
         </span>
       </a>
 
-      <a mat-list-item routerLink="/register" (click)="closeSidenav()">
+      <a
+        *ngIf="valor === 2"
+        mat-list-item
+        routerLink="/register"
+        (click)="closeSidenav()"
+      >
         <span class="entry">
           <img src="assets/images/register.png" class="menu-icon" />
           <span *ngIf="!isCollapsed">Registrar</span>
         </span>
       </a>
 
-      <a mat-list-item routerLink="/document" (click)="closeSidenav()">
+      <a
+        *ngIf="valor === 2"
+        mat-list-item
+        routerLink="/document"
+        (click)="closeSidenav()"
+      >
         <span class="entry">
           <img src="assets/images/acrobat.png" class="menu-icon" />
           <span *ngIf="!isCollapsed">Documentos</span>
+        </span>
+      </a>
+
+      <a
+        *ngIf="valor === 1"
+        mat-list-item
+        routerLink="/admin"
+        (click)="closeSidenav()"
+      >
+        <span class="entry">
+          <img src="assets/images/administrator.png" class="menu-icon" />
+          <span *ngIf="!isCollapsed">Gestión de Usuarios</span>
+        </span>
+      </a>
+      <a
+        *ngIf="valor === 1"
+        mat-list-item
+        routerLink="/organizacion"
+        (click)="closeSidenav()"
+      >
+        <span class="entry">
+          <img src="assets/images/organizational.png" class="menu-icon" />
+          <span *ngIf="!isCollapsed">Datos Organización</span>
+        </span>
+      </a>
+
+      <a
+        *ngIf="valor === 1"
+        mat-list-item
+        routerLink="/busqueda"
+        (click)="closeSidenav()"
+      >
+        <span class="entry">
+          <img src="assets/images/find_file.png" class="menu-icon" />
+          <span *ngIf="!isCollapsed">Búsqueda de datos</span>
         </span>
       </a>
 

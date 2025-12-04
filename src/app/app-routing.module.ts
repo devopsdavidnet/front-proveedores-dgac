@@ -6,6 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { PlantillaComponent } from './plantilla/plantilla.component';
 import { DocumentosComponent } from './documentos/documentos.component';
+import { AdminComponent } from './admin/admin.component';
+import { DocumentoOrganizacionesComponent } from './documento-organizaciones/documento-organizaciones.component';
+import { BusquedasOrganizacionComponent } from './busquedas-organizacion/busquedas-organizacion.component';
+import { ListarDocumentosComponent } from './listar-documentos/listar-documentos.component';
+import { VerInspectorComponent } from './ver-inspector/ver-inspector.component';
 
 /*const routes: Routes = [
  /*{path: '', component:HomeComponent},
@@ -43,6 +48,11 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent }, // Esto se carga DENTRO de la plantilla
       { path: 'register', component: RegistroComponent }, // Esto también
       { path: 'document', component: DocumentosComponent },
+      { path: 'admin', component: AdminComponent },
+      { path: 'organizacion', component: DocumentoOrganizacionesComponent },
+      { path: 'busqueda', component: BusquedasOrganizacionComponent },
+      { path: 'listarDocumentos', component: ListarDocumentosComponent },
+      { path: 'verInspector', component: VerInspectorComponent },
     ],
   },
 

@@ -1,0 +1,12 @@
+/* Para centrar la imagen dentro de la mat-card */
+.logo-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+/* Para controlar el tamaño de la imagen */
+.logo-form {
+  max-width: 120px; /* Ajusta este valor al tamaño que desees */
+  height: auto;
+}

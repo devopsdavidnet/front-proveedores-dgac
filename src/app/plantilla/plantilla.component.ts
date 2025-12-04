@@ -14,6 +14,8 @@ export class PlantillaComponent {
   sidenave!: MatSidenav;
   isMobile = true;
   isCollapsed = true;
+  valor: number = 2;
+
   constructor(
     private storageService: StorageService,
     private observer: BreakpointObserver,
@@ -27,8 +29,8 @@ export class PlantillaComponent {
         this.compartirService.getUsuario
       );
       console.log('usuario : ' + this.compartirService.usuario$);
-      console.log('storage', this.storageService.getItem('usuarioActual'));
-
+      console.log('storageDDD', this.storageService.getItem('usuarioActual'));
+      this.valor = this.storageService.getItem('usuarioActual').rolUsuario;
       if (screenSize.matches) {
         this.isMobile = true;
       } else {

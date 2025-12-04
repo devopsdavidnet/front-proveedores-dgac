@@ -40,6 +40,13 @@ import { DocumentosComponent } from './documentos/documentos.component'; // 👈
 import { MatTableModule } from '@angular/material/table';
 import { DocumentoViewerDialogComponent } from './documento-viewer-dialog/documento-viewer-dialog.component';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { AdminComponent } from './admin/admin.component';
+import { MatButtonModule } from '@angular/material/button';
+import { DocumentoOrganizacionesComponent } from './documento-organizaciones/documento-organizaciones.component';
+import { BusquedasOrganizacionComponent } from './busquedas-organizacion/busquedas-organizacion.component';
+import { ListarDocumentosComponent } from './listar-documentos/listar-documentos.component';
+import { AddInspectorComponent } from './add-inspector/add-inspector.component';
+import { VerInspectorComponent } from './ver-inspector/ver-inspector.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +67,12 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     DocumentosComponent,
     DocumentoViewerDialogComponent,
     SafeUrlPipe,
+    AdminComponent,
+    DocumentoOrganizacionesComponent,
+    BusquedasOrganizacionComponent,
+    ListarDocumentosComponent,
+    AddInspectorComponent,
+    VerInspectorComponent,
   ],
   imports: [
     MatTableModule,
@@ -84,6 +97,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     MatDialogModule,
     MatTooltipModule,
     MatCardModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

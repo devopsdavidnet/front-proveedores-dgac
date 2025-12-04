@@ -1,0 +1,36 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  
+
+  mat-card {
+    width: 70vw; 
+    padding: 1rem;
+  }
+
+  .row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .flex-1 {
+    width: 80%;
+
+  }
+  .select {
+    width: 40%;
+  }
+  .acciones {
+  display: flex;
+  justify-content: center; 
+  
+  }
+  button {
+    width: 40%; 
+  }
+
+
+
+
+}

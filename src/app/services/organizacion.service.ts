@@ -26,7 +26,7 @@ export class OrganizacionService {
   }
 
   enviarProveedor(datos: any): Observable<any> {
-    return this.http.post(this.apiUrl + '/proveedores/guardar', datos);
+    return this.http.post(this.apiUrl + '/usuarios/guardar', datos);
   }
 
   // actualizar
@@ -75,5 +75,17 @@ export class OrganizacionService {
     return this.http.get(`${this.apiUrl}/documentos/ver/${documentoId}`, {
       responseType: 'blob',
     });
+  }
+
+  listarUsuarios(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/usuarios`);
+  }
+
+  guardarUsuarios(usuarios: any[]): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/usuarios/actualizar`, usuarios);
+  }
+
+  getOrganizaciones(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/organizaciones`);
   }
 }

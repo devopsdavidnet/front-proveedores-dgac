@@ -52,10 +52,6 @@ export class DocumentosComponent implements OnInit {
   }
 
   verDocumento(doc: Documento): void {
-    console.log('DAVIDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd');
-    console.log('RRRRRRRRRRRRRRRr ', doc.id);
-    console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-
     this.organizacionService.getArchivo(doc.id).subscribe((file) => {
       const fileURL = URL.createObjectURL(file);
       this.dialog.open(DocumentoViewerDialogComponent, {

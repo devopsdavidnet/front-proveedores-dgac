@@ -1,0 +1,37 @@
+<div class="search-container">
+  <mat-card>
+    <mat-card-title>Búsqueda</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <div class="row">
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label
+              >Ingrese término a buscar segun tipo de Búsqueda</mat-label
+            >
+            <input
+              matInput
+              formControlName="termino"
+              placeholder="Ej: Matrícula, Nombre Persona..."
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="select">
+            <mat-label>Buscar en</mat-label>
+            <mat-select formControlName="categoria">
+              <mat-option
+                *ngFor="let opcion of opciones"
+                [value]="opcion.value"
+              >
+                {{ opcion.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="acciones">
+      <button mat-raised-button color="primary" (click)="buscar()">
+        Buscar..
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

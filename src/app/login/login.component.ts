@@ -58,22 +58,22 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     // Si el formulario es válido, procesa el envío
     if (this.loginForm.valid) {
-      console.log('Formulario enviado email:', this.loginForm.value.email);
       this.organizacionService
         .validarLogin(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
           next: (response) => {
-            console.log(' XXXXXXXXXXXXXXXXXXXXXXXX response ', response);
-            console.log(' DAVID APAZA: validacion correcta', response.value);
-
             this.compartirService.setUsuario(response);
             // Guardar los datos del usuario en localStorage
             this.storageService.setItem('usuarioActual', response);
             // Si el login es exitoso, navega a la página de inicio
-            console.log('******TTTTT[entro primero]TTTTTTTTTTT***********');
+            console.log('esto dato llegaron ', response.value);
+            console.log('esto es el rol de usuario ', response.rolUsuario);
             this.router.navigate(['/home']);
-
-            console.log('validacion correcta', response);
+            /*if (response.rolUsuario === 1) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/home']);
+            }*/
           },
           error: (error) => {
             console.log('Hubo un error en la solicitud.');

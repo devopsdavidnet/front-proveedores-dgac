@@ -1,5 +1,13 @@
 <div class="login-container">
   <mat-card class="login-card">
+    <div class="logo-container">
+      <img
+        src="assets/images/rpsa.png"
+        alt="DGAC - Bolivia"
+        class="logo-form"
+      />
+    </div>
+
     <mat-card-title class="login-title">Iniciar Sesión</mat-card-title>
     <mat-card-content>
       <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
@@ -8,7 +16,7 @@
           <input
             matInput
             type="email"
-            placeholder="ejemplo@correo.com"
+            placeholder="correo@correo.com"
             formControlName="email"
           />
           <mat-icon matSuffix>person</mat-icon>

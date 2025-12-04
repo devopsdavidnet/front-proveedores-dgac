@@ -29,7 +29,6 @@ export class SubirDocumentoComponent {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0]; //  se guarda el archivo
       this.uploadProgress = 0; // resetear progreso
-      console.log('Archivo seleccionado:', this.selectedFile.name);
     }
   }
 
