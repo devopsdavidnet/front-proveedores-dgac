@@ -88,4 +88,18 @@ export class OrganizacionService {
   getOrganizaciones(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/organizaciones`);
   }
+
+  guardarDatosInspector(datos: any): Observable<any> {
+    console.log('*****************  datos :', datos.tipo);
+    if (datos.tipo == 'CIAC/CEAC') {
+      datos.rolUsuario = 3;
+    }
+    if (datos.tipo == 'OMA') {
+      datos.rolUsuario = 4;
+    }
+    if (datos.tipo == 'AOC') {
+      datos.rolUsuario = 5;
+    }
+    return this.http.post(this.apiUrl + '/usuarios/guardarInspector', datos);
+  }
 }

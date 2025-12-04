@@ -8,6 +8,7 @@ import { AddInspectorComponent } from '../add-inspector/add-inspector.component'
 
 interface Personas {
   id: number;
+  rolUsuario: string;
   nombre: string;
   primerApellido: string;
   segundoApellido: string;
@@ -23,6 +24,7 @@ interface Personas {
 export class AdminComponent implements OnInit {
   form!: FormGroup;
   columnas: string[] = [
+    'rolUsuario',
     'nombre',
     'primerApellido',
     'segundoApellido',
@@ -64,6 +66,7 @@ export class AdminComponent implements OnInit {
     this.personas.push(
       this.fb.group({
         id: [u.id],
+        rolUsuario: [u.rolUsuario],
         nombre: [u.nombre],
         primerApellido: [u.primerApellido],
         segundoApellido: [u.segundoApellido],
@@ -135,5 +138,51 @@ export class AdminComponent implements OnInit {
     };
 
     this.dataSource.filter = filterValue;
+  }
+
+  // En tu componente.ts
+
+  // 1. Define correctamente la propiedad 'dataSource' (debe ser accesible desde la función).
+  // Asumiendo que es una MatTableDataSource:
+  //dataSource: MatTableDataSource<any>;
+
+  // ... (en algún lugar de tu componente, inicializas dataSource)
+
+  // 2. Define el getter para acceder a los datos (si dataSource es MatTableDataSource)
+  get tableData(): any[] {
+    // Si dataSource es MatTableDataSource, usa .data
+    return this.dataSource ? this.dataSource.data : [];
+  }
+
+  getNombreRol(index: number): string | null {
+    // 1. Verifica que el índice sea válido dentro del FormArray 'personas'.
+    if (index >= 0 && index < this.personas.length) {
+      // 2. Obtiene el FormGroup correspondiente a la fila (índice) actual.
+      const formGroup = this.personas.at(index) as FormGroup;
+
+      // 3. Obtiene el control 'rolUsuario'.
+      const rolControl = formGroup.get('rolUsuario');
+
+      if (rolControl && rolControl.value) {
+        const rolValue = rolControl.value;
+
+        // 4. Intenta extraer la propiedad 'nombreRol'.
+        // Esto asume que rolValue es un objeto como { id: 1, nombreRol: "Inspector" }
+        if (
+          typeof rolValue === 'object' &&
+          rolValue !== null &&
+          rolValue.nombreRol
+        ) {
+          return rolValue.nombreRol;
+        }
+
+        // 5. Si es una cadena simple, la devuelve directamente (segundo caso más común).
+        if (typeof rolValue === 'string') {
+          return rolValue;
+        }
+      }
+    }
+    // Devuelve null o 'N/A' si el índice es inválido o el valor no se pudo extraer.
+    return 'N/A';
   }
 }

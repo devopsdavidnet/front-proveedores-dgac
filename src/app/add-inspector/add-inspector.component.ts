@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { OrganizacionService } from '../services/organizacion.service';
 
 @Component({
   selector: 'app-add-inspector',
@@ -11,7 +12,8 @@ export class AddInspectorComponent implements OnInit {
   personaForm!: FormGroup;
   constructor(
     private dialogRef: MatDialogRef<AddInspectorComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private organizacionService: OrganizacionService
   ) {}
   ngOnInit(): void {
     this.personaForm = this.fb.group({
@@ -19,9 +21,11 @@ export class AddInspectorComponent implements OnInit {
       primerApellido: [null, [Validators.required]],
       segundoApellido: [null, [Validators.required]],
       cedulaIdentidad: [null, [Validators.required]],
-      celular: [null, [Validators.required]], // opcional, solo números
+      celular: [null, [Validators.required]],
+      cargo: ['Inspector'],
       correo: [null, [Validators.required]],
       tipo: [null, [Validators.required]],
+      rolUsuario: [],
     });
   }
 
@@ -34,6 +38,29 @@ export class AddInspectorComponent implements OnInit {
       console.log('Datos enviados:', this.personaForm.value);
       // Aquí llamas a tu servicio HTTP para enviar al backend
     } else {
+      this.personaForm.markAllAsTouched();
+    }
+  }
+
+  guardarInspector(): void {
+    if (this.personaForm.valid) {
+      this.organizacionService
+        .guardarDatosInspector(this.personaForm.value)
+        .subscribe({
+          next: (response) => {
+            console.log('se registro correctamente');
+          },
+          error: (error) => {
+            console.log('hubo un error en la solicitud', error);
+          },
+          complete: () => {
+            console.log('se completo correctamente');
+          },
+        });
+
+      console.log('Datos enviados del Inspector:', this.personaForm.value);
+      // Aquí llamas a tu servicio HTTP para enviar al backend
+      //     } else {
       this.personaForm.markAllAsTouched();
     }
   }

@@ -70,7 +70,7 @@
         <mat-form-field appearance="outline">
           <mat-label>INSPECTO DE:</mat-label>
           <mat-select formControlName="tipo">
-            <mat-option value="CIAC/CEAC">CIAC</mat-option>
+            <mat-option value="CIAC/CEAC">CIAC/CEAC</mat-option>
             <mat-option value="OMA">OMA</mat-option>
             <mat-option value="AOC">AOC</mat-option>
           </mat-select>
@@ -81,7 +81,14 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="guardarInspector()"
+      >
+        Guardar
+      </button>
       <button mat-button type="reset" (click)="personaForm.reset()">
         Limpiar
       </button>

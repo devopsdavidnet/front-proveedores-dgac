@@ -29,54 +29,63 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <form [formGroup]="form">
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8"
-    formArrayName="personas"
-  >
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
-        <input matInput formControlName="nombre" />
-      </td>
-    </ng-container>
+  <div style="max-height: 600px; overflow: auto">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      formArrayName="personas"
+    >
+      <ng-container matColumnDef="rolUsuario">
+        <th mat-header-cell *matHeaderCellDef>Tipo Usuario</th>
+        <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
+          <input matInput [value]="getNombreRol(i)" readonly />
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="primerApellido">
-      <th mat-header-cell *matHeaderCellDef>Primer Apellido</th>
-      <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
-        <input matInput formControlName="primerApellido" />
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
+          <input matInput formControlName="nombre" />
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="segundoApellido">
-      <th mat-header-cell *matHeaderCellDef>Segundo Apellido</th>
-      <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
-        <input matInput formControlName="segundoApellido" />
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="primerApellido">
+        <th mat-header-cell *matHeaderCellDef>Primer Apellido</th>
+        <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
+          <input matInput formControlName="primerApellido" />
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="correo">
-      <th mat-header-cell *matHeaderCellDef>Correo</th>
-      <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
-        <input matInput formControlName="correo" />
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="segundoApellido">
+        <th mat-header-cell *matHeaderCellDef>Segundo Apellido</th>
+        <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
+          <input matInput formControlName="segundoApellido" />
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="estadoRegistro">
-      <th mat-header-cell *matHeaderCellDef>Estado</th>
-      <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
-        <mat-form-field appearance="fill">
-          <mat-select formControlName="estadoRegistro">
-            <mat-option *ngFor="let est of estados" [value]="est">{{
-              est
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef>Correo</th>
+        <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
+          <input matInput formControlName="correo" />
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
-  </table>
+      <ng-container matColumnDef="estadoRegistro">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let row; let i = index" [formGroupName]="i">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="estadoRegistro">
+              <mat-option *ngFor="let est of estados" [value]="est">{{
+                est
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  </div>
 </form>
