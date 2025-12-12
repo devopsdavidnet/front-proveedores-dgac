@@ -26,6 +26,7 @@ export class AddInspectorComponent implements OnInit {
       correo: [null, [Validators.required]],
       tipo: [null, [Validators.required]],
       rolUsuario: [],
+      // rolUsuario: [null, [Validators.required]],
     });
   }
 

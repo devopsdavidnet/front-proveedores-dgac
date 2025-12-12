@@ -47,6 +47,7 @@ import { BusquedasOrganizacionComponent } from './busquedas-organizacion/busqued
 import { ListarDocumentosComponent } from './listar-documentos/listar-documentos.component';
 import { AddInspectorComponent } from './add-inspector/add-inspector.component';
 import { VerInspectorComponent } from './ver-inspector/ver-inspector.component';
+import { DocumentoPorOrganizacionComponent } from './documento-por-organizacion/documento-por-organizacion.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { VerInspectorComponent } from './ver-inspector/ver-inspector.component';
     ListarDocumentosComponent,
     AddInspectorComponent,
     VerInspectorComponent,
+    DocumentoPorOrganizacionComponent,
   ],
   imports: [
     MatTableModule,

@@ -11,6 +11,7 @@ import { DocumentoOrganizacionesComponent } from './documento-organizaciones/doc
 import { BusquedasOrganizacionComponent } from './busquedas-organizacion/busquedas-organizacion.component';
 import { ListarDocumentosComponent } from './listar-documentos/listar-documentos.component';
 import { VerInspectorComponent } from './ver-inspector/ver-inspector.component';
+import { DocumentoPorOrganizacionComponent } from './documento-por-organizacion/documento-por-organizacion.component';
 
 /*const routes: Routes = [
  /*{path: '', component:HomeComponent},
@@ -53,6 +54,10 @@ const routes: Routes = [
       { path: 'busqueda', component: BusquedasOrganizacionComponent },
       { path: 'listarDocumentos', component: ListarDocumentosComponent },
       { path: 'verInspector', component: VerInspectorComponent },
+      {
+        path: 'documentOrganization',
+        component: DocumentoPorOrganizacionComponent,
+      },
     ],
   },
 

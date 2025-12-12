@@ -15,6 +15,7 @@ export class PlantillaComponent {
   isMobile = true;
   isCollapsed = true;
   valor: number = 2;
+  nombre!: string;
 
   constructor(
     private storageService: StorageService,
@@ -30,7 +31,14 @@ export class PlantillaComponent {
       );
       console.log('usuario : ' + this.compartirService.usuario$);
       console.log('storageDDD', this.storageService.getItem('usuarioActual'));
-      this.valor = this.storageService.getItem('usuarioActual').rolUsuario;
+      this.valor =
+        this.storageService.getItem('usuarioActual').rolUsuario.idRol;
+      this.nombre =
+        this.storageService.getItem('usuarioActual').nombre +
+        ' ' +
+        this.storageService.getItem('usuarioActual').primerApellido +
+        ' ' +
+        this.storageService.getItem('usuarioActual').segundoApellido;
       if (screenSize.matches) {
         this.isMobile = true;
       } else {

@@ -3,6 +3,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span class="toolbar-title">Registro de Proveedores</span>
+  <a *ngIf="valor === 3 || valor === 4 || valor === 5" class="usuario-info">
+    <span class="entry">
+      <span>Usuario: {{ nombre }}</span>
+    </span>
+  </a>
 </mat-toolbar>
 <mat-sidenav-container autosize>
   <mat-sidenav
@@ -39,6 +44,18 @@
         <span class="entry">
           <img src="assets/images/acrobat.png" class="menu-icon" />
           <span *ngIf="!isCollapsed">Documentos</span>
+        </span>
+      </a>
+
+      <a
+        *ngIf="valor === 3 || valor === 4 || valor === 5"
+        mat-list-item
+        routerLink="/documentOrganization"
+        (click)="closeSidenav()"
+      >
+        <span class="entry">
+          <img src="assets/images/acrobat.png" class="menu-icon" />
+          <span *ngIf="!isCollapsed">Ver Documentos</span>
         </span>
       </a>
 

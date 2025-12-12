@@ -69,3 +69,29 @@ mat-sidenav-content{
   font-size: 18px;
   font-weight: 500;
 }
+
+/* Estilos para el elemento contenedor principal */
+.usuario-info {
+  /* Alinea el contenido (el texto) dentro del <a> a la derecha.
+     Funciona porque <a> es un elemento en línea, pero muchos frameworks 
+     lo tratan como bloque o le aplican display block. */
+  text-align: left; 
+  
+  /* Asegura que ocupe todo el ancho disponible para que la alineación 
+     a la derecha funcione correctamente, si no es ya un bloque. */
+  display: block; 
+  
+  /* Esto reduce el tamaño de la fuente. 
+     Puedes ajustar el valor (por ejemplo: 0.8em, small, 12px) */
+  font-size: 0.7em; 
+  
+  /* Opcional: Empuja el elemento completamente a la derecha. 
+     Usa esto si quieres que no ocupe todo el ancho. */
+  /* margin-left: auto; */
+}
+
+/* Si necesitas enfocar el estilo en el texto "Usuario:..." */
+.usuario-info .entry span {
+  /* Si el texto no se ve bien, puedes asegurar que no se herede un tamaño grande */
+  font-size: 0.9em; 
+}

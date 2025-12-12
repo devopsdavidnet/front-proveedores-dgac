@@ -15,7 +15,7 @@ export class OrganizacionService {
   enviarFormulario(datos: any): Observable<any> {
     return this.http.post(this.apiUrl + '/organizaciones/save', datos);
   }
-
+  //tiene que generar adminiracion y no pena
   generarReporte(nombreReporte: string, id: number): Observable<Blob> {
     return this.http.get(
       `${this.apiUrl + '/organizaciones'}/${nombreReporte}/${id}`,
