@@ -40,7 +40,6 @@ export class DocumentosComponent implements OnInit {
     const id = this.storageService.getItem('usuarioActual').idOrganizacion;
     console.log('david APAZA', id);
     // const idOrg = this.filtroForm.value.organizacionId;
-
     this.organizacionService.getDocumentosByOrganizacion(id).subscribe({
       next: (resp) => {
         this.dataSource = resp;

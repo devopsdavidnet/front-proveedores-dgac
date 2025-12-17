@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizacionService } from '../services/organizacion.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { ListarDocumentosComponent } from '../listar-documentos/listar-documentos.component';
 export interface Documento {
   id: number;
   nombreArchivo: string;
@@ -13,24 +16,59 @@ export interface Documento {
   styleUrls: ['./documento-por-organizacion.component.css'],
 })
 export class DocumentoPorOrganizacionComponent implements OnInit {
-  columnas: string[] = ['nombreArchivo', 'fechaCreacion', 'accion'];
-  dataSource: Documento[] = [];
-  constructor(private organizacionService: OrganizacionService) {}
+  dataSource = new MatTableDataSource<any>();
+  columnas: string[] = [
+    'nombreOrganizacion',
+    'tipoExplotador',
+    'departamentoId',
+    'telefono',
+    'correo',
+    'acciones',
+  ];
+  constructor(
+    private dialog: MatDialog,
+    private organizacionService: OrganizacionService
+  ) {}
   ngOnInit(): void {
     this.cargarDocumentos();
   }
 
-  cargarDocumentos(): void {
-    const id = 3; //this.storageService.getItem('usuarioActual').idOrganizacion;
+  verDetalle(element: any) {
+    /*alert(`
+      id:${element.id}
+      Nombre: ${element.nombreOrganizacion}
+      Tipo: ${element.tipoExplotador}
+      Departamento: ${element.departamentoId}
+      Teléfono: ${element.telefono}
+      Correo: ${element.correo}
+    `);*/
 
-    // const idOrg = this.filtroForm.value.organizacionId;
-    this.organizacionService.getDocumentosByOrganizacion(id).subscribe({
-      next: (resp) => {
-        this.dataSource = resp;
-        console.log('llego datos ' + this.dataSource);
+    const dialogRef = this.dialog.open(ListarDocumentosComponent, {
+      width: '1000px',
+      disableClose: true,
+      data: element.id,
+      position: {
+        top: '100px',
+      },
+    });
+
+    /*dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Datos del SMS aeronaves:', result);
+        // Aquí puedes asignar los datos al formulario principal, por ejemplo:
+        this.formRegistro.get('aeronaveInfo')?.setValue(result);
+      }
+    });*/
+  }
+
+  cargarDocumentos(): void {
+    this.organizacionService.getOrganizaciones().subscribe({
+      next: (data) => {
+        this.dataSource.data = data;
+        console.log('datos', this.dataSource);
       },
       error: (err) => {
-        console.error('Error al cargar documetnos', err);
+        console.error('Error al cargar organizaciones:', err);
       },
     });
   }
